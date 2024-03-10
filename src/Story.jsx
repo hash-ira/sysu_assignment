@@ -16,7 +16,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebas
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSetting = {
-  databaseURL: "ADD_YOUR_FIREBASE_REALTIME_DATABASE_LINK_HERE"
+  databaseURL: import.meta.env.VITE_FIREBASE_URL
 }
 
 const app = initializeApp(appSetting)
@@ -601,20 +601,22 @@ export default function Story() {
                         </li>
                     ))}
                     </ul>
-                )}
-            </div>          
+                  )}
+              
+              {/* Bug Fix : Positioning of Sort */}
+              <div className='flex-filter'>
+                <h2 className='filter-heading'>Sort: 
+                  <span onClick={handleflip}>
+                    {flipped ? `Newest to Oldest` : `Oldest to Newest`}
+                    </span>
+                </h2>
+                <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
+              </div>
+            </div>
           </div>
 
           <div className='filter'>
             <h1 className='total-story'><span>{stories === 1 ? `${stories} story` : stories === 0 ? `0 story` : `${stories} stories`}</span> for you to read</h1>
-            <div className='flex-filter'>
-              <h2 className='filter-heading'>Sort: 
-                <span onClick={handleflip}>
-                  {flipped ? `Newest to Oldest` : `Oldest to Newest`}
-                  </span>
-              </h2>
-              <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
-            </div>
           </div>
           
           { windowWidth > 425 ? <div>
