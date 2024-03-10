@@ -7,9 +7,12 @@ ReactJs, HTML, CSS
 ## Deployment
 To deploy this project:
 - Clone the repository to your local machine.
-- Setup the .env file with Firebase URL by creating a new project or plugging in an existing project.
+- Set up the .env file with Firebase URL by creating a new project or plugging in an existing project.
 - Run the following commands in the command line.
 
 ```bash
 npm install
 npm run dev
+```
+
+## Demo Link: https://sysu-assignment.netlify.app/
