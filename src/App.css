@@ -125,6 +125,8 @@ body,html{
   gap: 5px;
   align-items: center;
   list-style-type: none;
+  /* Bug fix: responsivness */
+  flex-wrap: wrap;
 }
 
 .list-items>li{
@@ -594,6 +596,15 @@ textarea{
   width: 469px;
 }
 
+/* Bug Fix : Desktop responsive for sizes greater thatn 1024px */
+@media screen and (min-width: 1025px) {  
+  .section-2-head{
+    width: 100%; 
+    margin-right: 30px;
+    justify-content: space-between;
+  }
+}
+
 
 @media screen and (max-width: 1024px) { 
   .list-items{
@@ -754,9 +765,10 @@ textarea{
     height: 0;
   }
 
+  /* Bug Fix: responsiveness */
   .list-items{
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 0;
   }
 
