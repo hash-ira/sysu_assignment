@@ -729,29 +729,17 @@ export default function Story() {
           { windowWidth > 425 ? <div>
             {selectedValue &&  (
               <div className='container'>
-                {/* <section className='item-section-main'> */}
-                  {/* <div className='item-section-container'> */}
                     {(check && mappable) && sorted(mappable)}
-                {/* </div> */}
-              {/* </section> */}
               </div>
             )}
 
               {(!menu || search.length === 0) &&  (<div className='container'>
-                {/* <section className='item-section-main'> */}
-                  {/* <div className='item-section-container'> */}
                     {(check && mappable) && sorted(mappable)}
-                  {/* </div> */}
-                {/* </section> */}
               </div>) 
               }
 
               {(search.length > 0 && menu) &&  (<div className='container'>
-                {/* <section className='item-section-main'> */}
-                  {/* <div className='item-section-container'> */}
                     {sorted(mappable)}
-                  {/* </div> */}
-                {/* </section> */}
             </div>) 
             }
           </div>
