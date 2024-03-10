@@ -118,6 +118,28 @@ body,html{
   margin: 4px 0;
 }
 
+/* Feature : star  click */
+.category-filter{
+  padding: 0px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.star{
+  padding-top: 5px;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+.star-icon-filled{
+  color: gold;
+}
+
+.star-icon-outline{
+  color:gray;
+}
 
 .list-items{
   margin: 0;

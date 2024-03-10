@@ -14,6 +14,8 @@ SwiperCore.use([EffectCoverflow]);
 // Npm Library for toast notification
 import toast, { Toaster } from 'react-hot-toast';
 
+import { RiStarFill } from 'react-icons/ri'; // Importing the star icon
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -80,6 +82,44 @@ export default function Story() {
       setShow4(false);
     }
   };
+
+  // Feature : star click to to save a category //
+  const [starClicked, setStarClicked] = useState(false);
+  const [bookmarkedCategories, setBookmarkedCategories] = useState([]);
+
+  const handleStarClick = (category) => {
+    if (category.length === 0) return;
+    try {
+      const isStarClicked = localStorage.getItem(`${category}_star`);
+      if (isStarClicked) {
+        localStorage.removeItem(`${category}_star`);
+        setBookmarkedCategories((prevBookmarks) => prevBookmarks.filter((c) => c !== category));
+        setStarClicked(false);
+      } else {
+        localStorage.setItem(`${category}_star`, true);
+        setBookmarkedCategories((prevBookmarks) => [...prevBookmarks, category]);
+        setStarClicked(true);
+      }
+    } catch (error) {
+      console.error('Error handling star click:', error);
+    }
+  };
+
+  useEffect(() => {
+    try {
+      const isStarClicked = localStorage.getItem(`${selectedCategory}_star`);
+      if (isStarClicked !== null) {
+        setStarClicked(JSON.parse(isStarClicked));
+      } else {
+        setStarClicked(false);
+      }
+    } catch (error) {
+      console.error('Error retrieving star status:', error);
+      setStarClicked(false);
+    }
+  }, [selectedCategory]);
+  
+  // *************************//
 
   useEffect(() => {
     onValue(cat, function(snapshot){
@@ -629,14 +669,24 @@ export default function Story() {
                   )}
               
               {/* Bug Fix : Positioning of Sort */}
-              <div className='flex-filter'>
-                <h2 className='filter-heading'>Sort: 
-                  <span onClick={handleflip}>
-                    {flipped ? `Newest to Oldest` : `Oldest to Newest`}
-                    </span>
-                </h2>
-                <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
+              <div className='category-filter'>
+
+                <div className='flex-filter'>
+                  <h2 className='filter-heading'>Sort: 
+                    <span onClick={handleflip}>
+                      {flipped ? `Newest to Oldest` : `Oldest to Newest`}
+                      </span>
+                  </h2>
+                  <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
+                </div>
+                {/* start icon */}
+                <div onClick={() => handleStarClick(selectedCategory)} className='star'>
+                  <RiStarFill
+                    className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
+                  />
+                </div>
               </div>
+
             </div>
           </div>
 
