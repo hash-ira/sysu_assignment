@@ -98,6 +98,8 @@ body,html{
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  height: 100vh;
 }
 
 .popular{
@@ -497,7 +499,7 @@ textarea{
 .show-para>p,
 .read-more{
   margin: 0;
-  width: 857px;
+  width: 100%;
   font-family: var(--ff-lato);
   font-weight: var(--fw-wght);
   font-size: 1.25rem;
@@ -594,6 +596,7 @@ textarea{
 .section-1{
   justify-content: flex-start;
   width: 469px;
+  /* overflow-y: auto; */
 }
 
 /* Bug Fix : Desktop responsive for sizes greater thatn 1024px */
@@ -677,7 +680,7 @@ textarea{
   }
 
   .item-section{
-    width: 600px;
+    width: 100%;
   }
 
   .item-section::after{

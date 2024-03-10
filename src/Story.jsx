@@ -154,6 +154,9 @@ export default function Story() {
     setSearch(category)
     setSearchResults2([])
     searchBar(category)
+
+    // Setting selected category
+    setSelectedCategory(category.toUpperCase())
   }
 
   function performSearch(searchValue){
@@ -580,7 +583,8 @@ export default function Story() {
         <section className='section-2'>
 
           <div className='section-2-head'>
-            <h1>Read their stories</h1>
+            {/* Feature: Title updates according to category */}
+            <h1>{selectedCategory.length === 0 ? 'Read their stories' : `Read stories on ${selectedCategory}` }</h1>
 
             <div className='looking' ref={dropdownRef}>
               <div className='choose'>
