@@ -14,7 +14,12 @@ SwiperCore.use([EffectCoverflow]);
 // Npm Library for toast notification
 import toast, { Toaster } from 'react-hot-toast';
 
+// npm library for popup
+import { Tooltip } from 'react-tooltip'
+
 import { RiStarFill } from 'react-icons/ri'; // Importing the star icon
+import { RiShareLine } from 'react-icons/ri'; // Importing the share icon
+import { MdContentCopy } from "react-icons/md"; // Importing copy icon
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
@@ -537,6 +542,18 @@ export default function Story() {
     })
   }
 
+  // tooltip copy button functionality
+  const handleCopyBtn = () => {
+    navigator.clipboard.writeText(`${window.location.href}${selectedCategoryStory.toLowerCase()}`)
+    .then(() => {
+      toast.success("Link Copied!")
+    })
+    .catch((error) => {
+      console.error('Failed to copy text:', error);
+      toast.error('Failed to copy text. Please try again.');
+    });
+  }
+
   return (
     <div className='flex'>
       <Toaster/>
@@ -680,12 +697,27 @@ export default function Story() {
                   </h2>
                   <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
                 </div>
-                {/* start icon */}
-                <div onClick={() => handleStarClick(selectedCategoryStory)} className='star'>
-                  <RiStarFill
-                    className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
-                  />
+
+                <div className='icon-container'>
+                  {/* star icon */}
+                  <div onClick={() => handleStarClick(selectedCategoryStory)} className='star'>
+                    <RiStarFill
+                      className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
+                    />
+                  </div>
+
+                  {/* share icon */}
+                  <div className=''>
+                    <a data-tooltip-id="my-tooltip"><RiShareLine className='share-btn'/> </a>
+                    <Tooltip id="my-tooltip" clickable>
+                      <div style={{ display: 'flex', flexDirection: 'row' , gap:'30px', alignItems: 'center' }}>
+                        <div> {`${window.location.href}${selectedCategoryStory.toLowerCase()}`}</div>
+                        <div><MdContentCopy onClick={handleCopyBtn} /></div>
+                      </div>
+                    </Tooltip>
+                  </div>
                 </div>
+
               </div>
 
             </div>
