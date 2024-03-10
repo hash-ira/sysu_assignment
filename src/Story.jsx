@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState , useRef} from 'react'
 import { AiOutlineSearch } from "react-icons/ai"
 import { BiChevronDown } from "react-icons/bi"
 import { BsPen, BsArrowLeft } from "react-icons/bs"
@@ -61,6 +61,22 @@ export default function Story() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
+  // Bug Fix : Closing of Dropdown when clicked outside
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      // Click occurred outside of the dropdown, close it
+      setShow3(false);
+      setShow4(false);
+    }
+  };
 
   useEffect(() => {
     onValue(cat, function(snapshot){
@@ -112,8 +128,6 @@ export default function Story() {
     
     const results = performSearch(searchValue)
     setSearchResults(results)
-    
-    
   }
   
   function handleSearch2(e){
@@ -561,7 +575,7 @@ export default function Story() {
           <div className='section-2-head'>
             <h1>Read their stories</h1>
 
-            <div className='looking'>
+            <div className='looking' ref={dropdownRef}>
               <div className='choose'>
                 <label htmlFor='choose'><h3>What are you looking for?</h3></label>
                 <input
