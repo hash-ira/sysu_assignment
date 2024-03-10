@@ -646,7 +646,7 @@ export default function Story() {
 
             <div className='looking' ref={dropdownRef}>
               <div className='choose'>
-                <label htmlFor='choose'><h3>What are you looking for?</h3></label>
+                <label htmlFor='choose'><h2>What are you looking for?</h2></label>
                 <input
                     type="text"
                     id='choose'
@@ -685,41 +685,40 @@ export default function Story() {
                     ))}
                     </ul>
                   )}
-              
+
               {/* Bug Fix : Positioning of Sort */}
-              <div className='category-filter'>
+                <div className='category-filter'>
 
-                <div className='flex-filter'>
-                  <h2 className='filter-heading'>Sort: 
-                    <span onClick={handleflip}>
-                      {flipped ? `Newest to Oldest` : `Oldest to Newest`}
-                      </span>
-                  </h2>
-                  <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
-                </div>
-
-                <div className='icon-container'>
-                  {/* star icon */}
-                  <div onClick={() => handleStarClick(selectedCategoryStory)} className='star'>
-                    <RiStarFill
-                      className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
-                    />
+                  <div className='flex-filter'>
+                    <h2 className='filter-heading'>Sort: 
+                      <span onClick={handleflip}>
+                        {flipped ? `Newest to Oldest` : `Oldest to Newest`}
+                        </span>
+                    </h2>
+                    <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
                   </div>
 
-                  {/* share icon */}
-                  <div className=''>
-                    <a data-tooltip-id="my-tooltip"><RiShareLine className='share-btn'/> </a>
-                    <Tooltip id="my-tooltip" clickable>
-                      <div style={{ display: 'flex', flexDirection: 'row' , gap:'30px', alignItems: 'center' }}>
-                        <div> {`${window.location.href}${selectedCategoryStory.toLowerCase()}`}</div>
-                        <div><MdContentCopy onClick={handleCopyBtn} /></div>
-                      </div>
-                    </Tooltip>
+                  <div className='icon-container'>
+                    {/* star icon */}
+                    <div onClick={() => handleStarClick(selectedCategoryStory)} className='star'>
+                      <RiStarFill
+                        className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
+                      />
+                    </div>
+
+                    {/* share icon */}
+                    <div className=''>
+                      <a data-tooltip-id="my-tooltip"><RiShareLine className='share-btn'/> </a>
+                      <Tooltip id="my-tooltip" clickable>
+                        <div style={{ display: 'flex', flexDirection: 'row' , gap:'30px', alignItems: 'center' }}>
+                          <div> {`${window.location.href}${selectedCategoryStory.toLowerCase()}`}</div>
+                          <div><MdContentCopy onClick={handleCopyBtn} /></div>
+                        </div>
+                      </Tooltip>
+                    </div>
                   </div>
+
                 </div>
-
-              </div>
-
             </div>
           </div>
 
@@ -730,29 +729,29 @@ export default function Story() {
           { windowWidth > 425 ? <div>
             {selectedValue &&  (
               <div className='container'>
-                <section className='item-section-main'>
-                  <div className='item-section-container'>
+                {/* <section className='item-section-main'> */}
+                  {/* <div className='item-section-container'> */}
                     {(check && mappable) && sorted(mappable)}
-                </div>
-              </section>
+                {/* </div> */}
+              {/* </section> */}
               </div>
             )}
 
               {(!menu || search.length === 0) &&  (<div className='container'>
-                <section className='item-section-main'>
-                  <div className='item-section-container'>
+                {/* <section className='item-section-main'> */}
+                  {/* <div className='item-section-container'> */}
                     {(check && mappable) && sorted(mappable)}
-                  </div>
-                </section>
+                  {/* </div> */}
+                {/* </section> */}
               </div>) 
               }
 
               {(search.length > 0 && menu) &&  (<div className='container'>
-                <section className='item-section-main'>
-                  <div className='item-section-container'>
+                {/* <section className='item-section-main'> */}
+                  {/* <div className='item-section-container'> */}
                     {sorted(mappable)}
-                  </div>
-                </section>
+                  {/* </div> */}
+                {/* </section> */}
             </div>) 
             }
           </div>
@@ -767,7 +766,7 @@ export default function Story() {
                   coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
-                    depth: 200,
+                    depth: 100,
                     modifier: 1,
                     slideShadows: false,
                   }}
