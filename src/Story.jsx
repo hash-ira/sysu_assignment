@@ -11,6 +11,9 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/components/effect-coverflow/effect-coverflow.min.css';
 SwiperCore.use([EffectCoverflow]);
 
+// Npm Library for toast notification
+import toast, { Toaster } from 'react-hot-toast';
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
@@ -188,6 +191,9 @@ export default function Story() {
     if(subject && describe && selectedCategory){
       push(ref(database, `List/${selectedCategory}`), Data)
 
+      // Bug Fix : Toast notification on publishing of story
+      toast.success("Story Published")
+      
       if(selectedCategory){
         if(newCat && !newCat.some((item) => (item.toLowerCase() === selectedCategory.toLowerCase()))){
           push(cat , selectedCategory)
@@ -489,6 +495,7 @@ export default function Story() {
 
   return (
     <div className='flex'>
+      <Toaster/>
       <Popular onChildValue={handleChildValue} />
       <div className='story-section'>
 
