@@ -40,6 +40,7 @@ export default function Story() {
   const [searchText, setSearchText] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedCategoryStory, setSelectedCategoryStory] = useState('')
 
 
   const [search, setSearch] = useState('')
@@ -107,7 +108,7 @@ export default function Story() {
 
   useEffect(() => {
     try {
-      const isStarClicked = localStorage.getItem(`${selectedCategory}_star`);
+      const isStarClicked = localStorage.getItem(`${selectedCategoryStory}_star`);
       if (isStarClicked !== null) {
         setStarClicked(JSON.parse(isStarClicked));
       } else {
@@ -117,7 +118,7 @@ export default function Story() {
       console.error('Error retrieving star status:', error);
       setStarClicked(false);
     }
-  }, [selectedCategory]);
+  }, [selectedCategoryStory]);
   
   // *************************//
 
@@ -188,15 +189,15 @@ export default function Story() {
     setSearchResults([])
     setShow(false)
   }
-
+  
   function handleCategorySelect2(category){
     setSelectedValue('')
     setSearch(category)
     setSearchResults2([])
     searchBar(category)
-
+    
     // Setting selected category
-    setSelectedCategory(category.toUpperCase())
+    setSelectedCategoryStory(category.toUpperCase())
   }
 
   function performSearch(searchValue){
@@ -624,7 +625,7 @@ export default function Story() {
 
           <div className='section-2-head'>
             {/* Feature: Title updates according to category */}
-            <h1>{selectedCategory.length === 0 ? 'Read their stories' : `Read stories on ${selectedCategory}` }</h1>
+            <h1>{selectedCategoryStory.length === 0 ? 'Read their stories' : `Read stories on ${selectedCategoryStory}` }</h1>
 
             <div className='looking' ref={dropdownRef}>
               <div className='choose'>
@@ -680,7 +681,7 @@ export default function Story() {
                   <CgArrowsExchangeAltV  className='filterarrow' onClick={handleflip}/>
                 </div>
                 {/* start icon */}
-                <div onClick={() => handleStarClick(selectedCategory)} className='star'>
+                <div onClick={() => handleStarClick(selectedCategoryStory)} className='star'>
                   <RiStarFill
                     className={starClicked ? 'star-icon-filled' : 'star-icon-outline'}
                   />
